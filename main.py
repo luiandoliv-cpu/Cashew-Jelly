@@ -1,8 +1,18 @@
 import pygame
 import os
 
+screen = pygame.display.set_mode((1280, 720))
+title = pygame.display.set_caption("Cashew Jelly")
+fps = 60
+timer = pygame.time.Clock()
+screen.fill('Light Blue')
+timer.tick(fps)
+
 BASE_DIR = os.path.dirname(__file__)
 font_path = os.path.join(BASE_DIR, "fonts", "Minecraft.ttf")
+icon_path = os.path.join(BASE_DIR, "assets", "cashewjellylogo.png")
+icon = pygame.image.load(icon_path)
+pygame.display.set_icon(icon)
 
 pygame.init()
 
@@ -11,24 +21,10 @@ font_button = pygame.font.Font(font_path, 40)
 
 game_state = "menu"   # ← começa no menu
 
-screen = pygame.display.set_mode((1280, 720))
-title = pygame.display.set_caption("Cashew Jelly")
-icon = pygame.image.load("cashewjellylogo.png")
-pygame.display.set_icon(icon)
-fps = 60
-timer = pygame.time.Clock()
-screen.fill('Light Blue')
-timer.tick(fps)
-
-
 running = True
 
 def draw_menu():
     screen.fill((135, 206, 250))  # azul claro
-
-    # Título
-    title_text = font_title.render("Cashew Jelly", True, (255,255,255))
-    screen.blit(title_text, (420, 150))
 
     # Botão START
     start_button = pygame.Rect(540, 350, 200, 80)
