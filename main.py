@@ -5,13 +5,14 @@ screen = pygame.display.set_mode((1280, 720))
 title = pygame.display.set_caption("Cashew Jelly")
 fps = 60
 timer = pygame.time.Clock()
-screen.fill('Light Blue')
 timer.tick(fps)
 
 BASE_DIR = os.path.dirname(__file__)
 font_path = os.path.join(BASE_DIR, "fonts", "Minecraft.ttf")
 icon_path = os.path.join(BASE_DIR, "assets", "cashewjellylogo.png")
 icon = pygame.image.load(icon_path)
+telinha = pygame.image.load("manoteste1.png")
+exitrect = pygame.Rect(548, 589, 176, 88)
 pygame.display.set_icon(icon)
 
 pygame.init()
@@ -19,26 +20,9 @@ pygame.init()
 font_title = pygame.font.Font(font_path, 80)
 font_button = pygame.font.Font(font_path, 40)
 
-game_state = "menu"   # ← começa no menu
+game_state = "menu"
 
 running = True
-
-def draw_menu():
-    screen.fill((135, 206, 250))  # azul claro
-
-    # Botão START
-    start_button = pygame.Rect(540, 350, 200, 80)
-    pygame.draw.rect(screen, (60, 180, 75), start_button)
-
-    start_text = font_button.render("START", True, (255,255,255))
-    screen.blit(start_text, (580, 370))
-
-    return start_button
-def draw_game():
-    screen.fill((50, 170, 90))
-    
-    text = font_button.render("JOGO INICIADO!", True, (255,255,255))
-    screen.blit(text, (500, 350))
 
 running = True
 while running:
@@ -51,15 +35,12 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # ESTADOS DO JOGO
-    if game_state == "menu":
-        start_button = draw_menu()
 
-        # clicar no botão start
-        if start_button.collidepoint(mouse_pos) and mouse_click:
-            game_state = "game"
+    if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                if exitrect.collidepoint(event.pos):
+                    running = False
 
-    elif game_state == "game":
-        draw_game()
-
+    screen.blit(telinha, (0, 0))
+    pygame.display.flip()
     pygame.display.update()
